@@ -1,0 +1,66 @@
+// .devcontainer/devcontainer.json
+// For format details, see https://aka.ms/devcontainer.json.
+// For config options, see: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "Console Ticket Queue System Dockerfile",
+	"build": {
+		"context": "..",
+		"dockerfile": "../Dockerfile"
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/python:1": {},
+		"ghcr.io/devcontainers-extra/features/pylint:2": {},
+		"ghcr.io/devcontainers-extra/features/mypy:2": {},
+		"ghcr.io/devcontainers-extra/features/ruff:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.pylance",
+				"ms-python.pylint", 
+				"charliermarsh.ruff"
+			],
+			"settings": {
+				// ── Format on Save with Ruff ──────────────────────────────────────
+				"[python]": {
+					"editor.defaultFormatter": "charliermarsh.ruff",
+					"editor.formatOnSave": true,
+					"editor.codeActionsOnSave": {
+						"source.fixAll": "always",
+						"source.organizeImports": "explicit"
+					}
+				},
+				"ruff.lineLength": 80,
+				// ── Linting with Pylint ────────────────────────────────────────────
+				"python.linting.enabled": true,
+				"python.linting.pylintEnabled": true,
+				"python.linting.pylintArgs": [
+					"--disable=C0114",
+					"--disable=C0103"
+				],
+				// ── Type Checking with Mypy ───────────────────────────────────────
+				"python.linting.mypyEnabled": true,
+				"python.linting.mypyArgs": [
+					// "--ignore-missing-imports"
+				],
+				"python.analysis.typeCheckingMode": "basic",
+				"python.analysis.autoIndent": true,
+				// ── Python Interpreter Path ─────────────────────────────────────
+				"python.defaultInterpreterPath": "/app/.venv/bin/python"
+			}
+		}
+	},
+	"postCreateCommand": "uv run main.py"
+	// Other optional properties you can uncomment as needed:
+	// -----------------------------------------------------
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	// Use 'forwardPorts' to make ports inside the container available locally.
+	// "forwardPorts": [],
+	// Run commands after the container is created.
+	// "postCreateCommand": "cat /etc/os-release",
+	// Uncomment to connect as an existing user other than the container default.
+	// More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "devcontainer"
+}
