@@ -1,11 +1,15 @@
 from core import entities
 
 # General system messages
-WELCOMING_MESSAGE = "[bold cyan]Welcome to the Console Ticket System[/bold cyan]"
+WELCOMING_MESSAGE = (
+    "[bold cyan]Welcome to the Console Ticket System[/bold cyan]"
+)
 CHOOSE_MESSAGE = "[bold white]Choose an option[/bold white]"
 EXIT_MESSAGE = "[bold red]3. Exit[/bold red]"
 EXITING_MESSAGE = "[bold magenta]Exiting... Goodbye![/bold magenta]"
-INVALID_CHOICE_MESSAGE = "[bold red]Invalid choice. Please try again.[/bold red]"
+INVALID_CHOICE_MESSAGE = (
+    "[bold red]Invalid choice. Please try again.[/bold red]"
+)
 
 # Guest
 GUEST_MESSAGE = "[bold blue]You are using the system as a Guest[/bold blue]"
@@ -29,8 +33,8 @@ CHOOSE_TICKET_TYPE_MESSAGE = "[bold white]Choose ticket type:[/bold white]"
 TICKET_TYPE_GENERAL = (
     f"[bold cyan]1. {entities.TicketType.GENERAL.capitalize()}[/bold cyan]"
 )
-TICKET_TYPE_PRIORITY = (
-    f"[bold magenta]2. {entities.TicketType.PRIORITY.capitalize()}[/bold magenta]"
-)
+TICKET_TYPE_PRIORITY = f"[bold magenta]2. {entities.TicketType.PRIORITY.capitalize()}[/bold magenta]"
 ENTER_TYPE_MESSAGE = "[bold white]Enter type [1/2][/bold white]"
 CREATED_TICKET_MESSAGE = "[bold green]Created Ticket[/bold green]"
+
+SEPARATOR = f"{'':-<50}"

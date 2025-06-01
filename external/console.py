@@ -23,7 +23,10 @@ class ConsoleApp:
         while True:
             console.print(constants.WELCOMING_MESSAGE, "\n")
 
-            if self.logged_in_user and self.logged_in_user.role == entities.Role.ADMIN:
+            if (
+                self.logged_in_user
+                and self.logged_in_user.role == entities.Role.ADMIN
+            ):
                 console.print(constants.ADMIN_LOGGED_IN_MESSAGE)
                 console.print(f"1. {constants.CALL_NEXT_TICKET_MESSAGE}")
                 console.print(f"2. {constants.LOGOUT_MESSAGE}")
@@ -35,18 +38,23 @@ class ConsoleApp:
                         ticket = self.controller.call_ticket()
                         if ticket:
                             console.print_json(json.dumps(ticket.to_dict()))
+                            console.print(constants.SEPARATOR, end="\n")
                         else:
                             console.print(constants.NO_TICKETS_MESSAGE)
+                            console.print(constants.SEPARATOR, end="\n")
                     case "2":
                         self.logged_in_user = None
                         console.print(constants.LOGGED_OUT_MESSAGE)
+                        console.print(constants.SEPARATOR, end="\n")
                     case "3":
                         console.print(constants.EXITING_MESSAGE)
+                        console.print(constants.SEPARATOR, end="\n")
                         break
                     case _:
-                        console.print(constants.INVALID_CHOICE_MESSAGE)
-
-                console.print()
+                        console.print(
+                            constants.INVALID_CHOICE_MESSAGE, end="\n"
+                        )
+                        console.print(constants.SEPARATOR, end="\n")
 
             else:
                 console.print(constants.GUEST_MESSAGE)
@@ -74,13 +82,16 @@ class ConsoleApp:
                         ticket = self.controller.apply_ticket(name, ticket_type)
                         console.print_json(json.dumps(ticket.to_dict()))
                         console.print(constants.EXITING_MESSAGE)
+                        console.print(constants.SEPARATOR, end="\n")
 
                     case "2":
                         username = Prompt.ask(constants.ENTER_USERNAME_MESSAGE)
                         password = Prompt.ask(
                             constants.ENTER_PASSWORD_MESSAGE, password=True
                         )
-                        user = self.auth_controller.login_user(username, password)
+                        user = self.auth_controller.login_user(
+                            username, password
+                        )
                         if user and user.role == entities.Role.ADMIN:
                             self.logged_in_user = user
                             console.print(
@@ -88,12 +99,15 @@ class ConsoleApp:
                             )
                         else:
                             console.print(constants.LOGIN_FAILED_MESSAGE)
+                            console.print(constants.SEPARATOR, end="\n")
 
                     case "3":
                         console.print(constants.EXITING_MESSAGE)
+                        console.print(constants.SEPARATOR, end="\n")
                         break
 
                     case _:
-                        console.print(constants.INVALID_CHOICE_MESSAGE)
-
-                console.print()
+                        console.print(
+                            constants.INVALID_CHOICE_MESSAGE, end="\n"
+                        )
+                        console.print(constants.SEPARATOR, end="\n")

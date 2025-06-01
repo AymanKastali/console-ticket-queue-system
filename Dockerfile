@@ -11,3 +11,5 @@ ENV UV_PROJECT_ENVIRONMENT=.venv
 RUN uv sync --locked
 
 ENV PATH="/app/.venv/bin:$PATH"
+
+CMD ["uv", "run", "main.py"]
